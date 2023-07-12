@@ -33,14 +33,23 @@ describe("getCharacterFrequency", () => {
 });
 
 describe("validatePairs", () => {
+  test("should return invalid when passed a string with no parentheses", () => {
+    expect(validatePairs("")).toBe("invalid");
+  });
   test("should return valid when passed a string of a single balanced pair of parenthesis", () => {
     expect(validatePairs("()")).toBe("valid");
+  });
+  test("should return invalid when passed a string of a one type of parenthesis", () => {
+    expect(validatePairs("(")).toBe("invalid");
   });
   test("should return invalid when passed a string of a single unbalanced pair of parenthesis", () => {
     expect(validatePairs(")(")).toBe("invalid");
   });
   test("should return valid when passed a string of a nested balanced paired of parentheses", () => {
     expect(validatePairs("(())")).toBe("valid");
+  });
+  test("should return invalid when passed a string of a nested unbalanced paired of parentheses", () => {
+    expect(validatePairs("(()()))")).toBe("invalid");
   });
   test("should return valid when passed a string of two non nested balanced paired of parentheses", () => {
     expect(validatePairs("()()")).toBe("valid");
@@ -50,5 +59,11 @@ describe("validatePairs", () => {
   });
   test("should return invalid when passed a string of nested balanced pairs and non nested unbalanced pair of parentheses", () => {
     expect(validatePairs("((())))(")).toBe("invalid");
+  });
+  test("should return valid when passed a string of balanced pairs of parentheses mixed with characters", () => {
+    expect(validatePairs("(a)")).toBe("valid");
+  });
+  test("should return invalid when passed a string of unbalanced pairs of parentheses mixed with characters", () => {
+    expect(validatePairs("()a)")).toBe("invalid");
   });
 });

@@ -27,6 +27,10 @@ function getCharacterFrequency(str) {
 }
 
 function validatePairs(str) {
+  if (!str.includes("(") || !str.includes(")")) {
+    return "invalid";
+  }
+
   let parenthesisCount = 0;
 
   for (i = 0; i < str.length; i++) {
@@ -40,6 +44,7 @@ function validatePairs(str) {
       return "invalid";
     }
   }
+
   return "valid";
 }
 
