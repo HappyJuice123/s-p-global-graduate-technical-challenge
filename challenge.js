@@ -1,25 +1,27 @@
-function letterCount(str) {
-  const upperCasedStr = str.toUpperCase();
+function getCharacterFrequency(str) {
+  const upperCasedStrNoSpaces = str.split(" ").join("").toUpperCase();
 
-  const letterFrequency = {};
+  const characterFrequency = {};
 
   let result = "";
 
-  for (i = 0; i < upperCasedStr.length; i++) {
-    if (!letterFrequency[upperCasedStr[i]]) {
-      letterFrequency[upperCasedStr[i]] = 1;
+  for (i = 0; i < upperCasedStrNoSpaces.length; i++) {
+    if (!characterFrequency[upperCasedStrNoSpaces[i]]) {
+      characterFrequency[upperCasedStrNoSpaces[i]] = 1;
     } else {
-      letterFrequency[upperCasedStr[i]]++;
+      characterFrequency[upperCasedStrNoSpaces[i]]++;
     }
   }
 
-  for (const letter in letterFrequency) {
-    if (letter !== upperCasedStr[0]) {
+  for (const letter in characterFrequency) {
+    if (letter !== upperCasedStrNoSpaces[0]) {
       result += ", ";
     }
 
-    result += `${letter} : ${letterFrequency[letter]}`;
+    result += `${letter} : ${characterFrequency[letter]}`;
   }
+
+  console.log(characterFrequency);
 
   return result;
 }
@@ -34,8 +36,6 @@ function validatePairs(str) {
       parenthesisCount--;
     }
 
-    console.log(str, str[i], parenthesisCount);
-
     if (parenthesisCount < 0) {
       return "invalid";
     }
@@ -43,4 +43,4 @@ function validatePairs(str) {
   return "valid";
 }
 
-module.exports = { letterCount, validatePairs };
+module.exports = { getCharacterFrequency, validatePairs };
