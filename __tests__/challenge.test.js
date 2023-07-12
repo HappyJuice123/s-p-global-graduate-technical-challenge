@@ -34,6 +34,7 @@ describe("getCharacterFrequency", () => {
 
 describe("validatePairs", () => {
   test("should return invalid when passed a string with no parentheses", () => {
+    expect(validatePairs("abc")).toBe("invalid");
     expect(validatePairs("")).toBe("invalid");
   });
   test("should return valid when passed a string of a single balanced pair of parenthesis", () => {
@@ -41,6 +42,7 @@ describe("validatePairs", () => {
   });
   test("should return invalid when passed a string of a one type of parenthesis", () => {
     expect(validatePairs("(")).toBe("invalid");
+    expect(validatePairs(")")).toBe("invalid");
   });
   test("should return invalid when passed a string of a single unbalanced pair of parenthesis", () => {
     expect(validatePairs(")(")).toBe("invalid");
@@ -54,8 +56,13 @@ describe("validatePairs", () => {
   test("should return valid when passed a string of two non nested balanced paired of parentheses", () => {
     expect(validatePairs("()()")).toBe("valid");
   });
+  test("should return invalid when passed a string of two non nested balanced pair and one unbalanced pair of parentheses", () => {
+    expect(validatePairs("())(")).toBe("invalid");
+    expect(validatePairs(")(()")).toBe("invalid");
+  });
   test("should return valid when passed a string of nested balanced pairs and a non nested balanced pair of parentheses", () => {
     expect(validatePairs("((()))()")).toBe("valid");
+    expect(validatePairs("()((()))")).toBe("valid");
   });
   test("should return invalid when passed a string of nested balanced pairs and non nested unbalanced pair of parentheses", () => {
     expect(validatePairs("((())))(")).toBe("invalid");
@@ -65,5 +72,8 @@ describe("validatePairs", () => {
   });
   test("should return invalid when passed a string of unbalanced pairs of parentheses mixed with characters", () => {
     expect(validatePairs("()a)")).toBe("invalid");
+    expect(validatePairs("(a))")).toBe("invalid");
+    expect(validatePairs("a())")).toBe("invalid");
+    expect(validatePairs("())a")).toBe("invalid");
   });
 });
