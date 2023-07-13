@@ -21,7 +21,7 @@ function getCharacterFrequency(str) {
     result += `${letter} : ${characterFrequency[letter]}`;
   }
 
-  console.log(characterFrequency);
+  console.log(str, "output >>", result);
 
   return result;
 }
